@@ -99,11 +99,11 @@ curl -X POST https://<your-vercel-domain>/ask \
 
 ## Deployed URL
 
-- Base URL: `https://<your-deployed-domain>`
-- Ask endpoint: `https://<your-deployed-domain>/ask`
-- Health endpoint: `https://<your-deployed-domain>/healthz`
+- Base URL: https://provue-tara-nine.vercel.app
+- Ask endpoint: https://provue-tara-nine.vercel.app/ask
+- Health endpoint: https://provue-tara-nine.vercel.app/healthz
 
-Replace placeholders above with your live deployment URL before submission.
+This is the live deployment used for evaluation. After you submit, rotate any secrets used during testing.
 
 ## Observability Evidence
 

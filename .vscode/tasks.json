@@ -1,0 +1,204 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Check sample_a counts",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"scripts/check-sample-a-counts.cjs"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check Neon counts",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"unset DATABASE_URL && node scripts/check-db-counts.cjs"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Ingest sample_a clean",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"unset DATABASE_URL && npm run ingest -- ./data/sample_a"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Recheck Neon counts",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"unset DATABASE_URL && node scripts/check-db-counts.cjs"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Run Tara on 3100",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"unset DATABASE_URL && PORT=3100 npm run dev"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "Eval against 3100",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"unset DATABASE_URL && BASE_URL=http://localhost:3100 npm run eval"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check root route",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"curl -i http://localhost:3100/ | head -n 20"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check healthz route",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"curl -sS http://localhost:3100/healthz"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Init and push git repo",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"echo \"# Assesment\" >> README.md && git init && git add README.md && git commit -m \"first commit\" && git branch -M main && git remote add origin https://github.com/omkarr10/Assesment.git && git push -u origin main"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Verify git state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git branch --show-current && git remote -v && git log --oneline -n 1"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Try SSH push",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git remote set-url origin git@github.com:omkarr10/Assesment.git && git push -u origin main"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check SSH identities",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"ssh-add -l"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Verify git remote",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git remote -v"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Load SSH key and push",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"eval \"$(ssh-agent -s)\" && ssh-add --apple-use-keychain ~/.ssh/id_ed25519 && ssh-add -l && git push -u origin main"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Check git state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git status --short && echo '---' && git remote -v && echo '---' && git branch --show-current && echo '---' && git log --oneline -n 3"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Push repo",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git push -u origin main"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Create new SSH key",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"ssh-keygen -t ed25519 -C 'omkar@github' -f ~/.ssh/id_ed25519_github -N ''"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Inspect git state",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git status --short && git branch --show-current && git remote -v && git log --oneline -n 1"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Push to GitHub",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git push -u origin main"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Push over HTTPS",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-c",
+				"git remote set-url origin https://github.com/omkarr10/Assesment.git && git push -u origin main"
+			],
+			"isBackground": false
+		}
+	]
+}
